@@ -19,15 +19,22 @@ import java.util.Arrays;
 import java.util.List;
 
 @RestController
-@RequestMapping("/dnd")
+@RequestMapping("/character")
 @AllArgsConstructor
 public class GameCharacterController {
+    private final GameCharacterService gameCharacterService;
 
 
 
+    @DeleteMapping("/{id}")
+    public void deleteGameCharacter(@PathVariable("id") int id){
+        System.out.println("test");
+        System.out.println(id);
+        gameCharacterService.delete(id);
+    }
 
 
-    @ResponseBody
+
     @GetMapping("/sayHello")
     public String sayHello(){
         return "Hello";
@@ -37,7 +44,6 @@ public class GameCharacterController {
 
 
 
-    private final GameCharacterService gameCharacterService;
 
     @GetMapping
     public List<GameCharacter> getGameCharacter(){
@@ -91,7 +97,6 @@ public class GameCharacterController {
         );
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
-
 
 
     public boolean isCorrect(GameCharacter gameCharacter){

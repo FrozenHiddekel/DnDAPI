@@ -33,4 +33,12 @@ public class GameCharacterService {
         gameCharacterRepository.save(gameCharacter);
     }
 
+
+    //вероятно функция снизу должна принимать энтити
+    @Transactional
+    public void delete(int id){
+        Optional<GameCharacter> foundGameCharacter = gameCharacterRepository.findById(id);
+        gameCharacterRepository.delete(foundGameCharacter.orElseThrow(GameCharacterNotFoundException::new));
+
+    }
 }

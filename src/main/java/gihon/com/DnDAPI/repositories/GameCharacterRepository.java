@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface GameCharacterRepository extends JpaRepository<GameCharacter, Integer> {
+    @Override
+    void delete(GameCharacter gameCharacter);
 }

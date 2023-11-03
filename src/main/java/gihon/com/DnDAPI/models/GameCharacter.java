@@ -1,21 +1,21 @@
 package gihon.com.DnDAPI.models;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+
 
 @Entity
 @Table(name = "game_character")
 @ToString
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class GameCharacter {
 
     @Id
@@ -58,6 +58,12 @@ public class GameCharacter {
 
     @Column(name = "description")
     private String description;
+
+
+    @OneToMany(mappedBy = "gameCharacter")
+    //@ToString.Exclude
+    //@JsonIgnore
+    private List<CharacterClass> levels;
 
 
 }
