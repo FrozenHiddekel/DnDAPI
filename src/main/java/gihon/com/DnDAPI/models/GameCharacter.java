@@ -1,21 +1,21 @@
 package gihon.com.DnDAPI.models;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Digits;
+import jakarta.validation.constraints.Positive;
 import lombok.*;
 
 import java.util.List;
 
-
-@Entity
-@Table(name = "game_character")
 @ToString
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+
+@Entity
+@Table(name = "game_character")
 public class GameCharacter {
 
     @Id
@@ -27,30 +27,30 @@ public class GameCharacter {
     private int personId;
 
     @Column(name = "class")
-    private String dndClass;
+    private int dndClass;
 
     @Column(name = "dexterity")
-    @Min(value = 0, message = "Dexterity should be greater than 0")
+    @Positive(message = "Dexterity should be greater than 0")
     private int dexterity;
 
     @Column(name = "strength")
-    @Min(value = 0, message = "Strength should be greater than 0")
+    @Positive(message = "Strength should be greater than 0")
     private int strength;
 
     @Column(name = "constitution")
-    @Min(value = 0, message = "Constitution should be greater than 0")
+    @Positive(message = "Constitution should be greater than 0")
     private int constitution;
 
     @Column(name = "intelligence")
-    @Min(value = 0, message = "Intelligence should be greater than 0")
+    @Positive(message = "Intelligence should be greater than 0")
     private int intelligence;
 
     @Column(name = "charisma")
-    @Min(value = 0, message = "Charisma should be greater than 0")
+    @Positive(message = "Charisma should be greater than 0")
     private int charisma;
 
     @Column(name = "wisdom")
-    @Min(value = 0, message = "Wisdom should be greater than 0")
+    @Positive(message = "Wisdom should be greater than 0")
     private int wisdom;
 
     @Column(name = "race")
@@ -59,11 +59,13 @@ public class GameCharacter {
     @Column(name = "description")
     private String description;
 
-
     @OneToMany(mappedBy = "gameCharacter")
-    //@ToString.Exclude
-    //@JsonIgnore
     private List<CharacterClass> levels;
 
+    @OneToMany(mappedBy = "gameCharacter")
+    private List<CharacterItem> items;
+
+    @OneToMany(mappedBy = "gameCharacter")
+    private List<CharacterSpell> spells;
 
 }

@@ -10,20 +10,19 @@ import gihon.com.DnDAPI.repositories.GameCharacterRepository;
 import java.util.List;
 import java.util.Optional;
 
+@AllArgsConstructor
+
 @Service
 @Transactional(readOnly = true)
-@AllArgsConstructor
 public class GameCharacterService {
     private final GameCharacterRepository gameCharacterRepository;
 
     public List<GameCharacter> findAll(){
-        //System.out.println(gameCharacterRepository.findAll().get(0).toString());
-
         return gameCharacterRepository.findAll();
     }
 
 
-    public GameCharacter findOne(int id){
+    public GameCharacter findById(int id){
         Optional<GameCharacter> foundGameCharacter = gameCharacterRepository.findById(id);
         return foundGameCharacter.orElseThrow(GameCharacterNotFoundException::new);
     }
@@ -34,7 +33,6 @@ public class GameCharacterService {
     }
 
 
-    //вероятно функция снизу должна принимать энтити
     @Transactional
     public void delete(int id){
         Optional<GameCharacter> foundGameCharacter = gameCharacterRepository.findById(id);

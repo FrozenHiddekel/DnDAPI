@@ -2,7 +2,6 @@ package gihon.com.DnDAPI.services;
 
 
 import gihon.com.DnDAPI.models.CharacterClass;
-import gihon.com.DnDAPI.models.GameCharacter;
 import gihon.com.DnDAPI.repositories.CharacterClassRepository;
 import gihon.com.DnDAPI.util.errors.CharacterClassNotFoundException;
 import lombok.AllArgsConstructor;
@@ -24,8 +23,7 @@ public class CharacterClassService {
         return characterClassRepository.findAll();
     }
 
-    public CharacterClass findOne(int id){
-        System.out.println("sssssssssssssssadadasdasssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss");
+    public CharacterClass findById(int id){
         Optional<CharacterClass> foundCharacterClass = characterClassRepository.findById(id);
         return foundCharacterClass.orElseThrow(CharacterClassNotFoundException::new);
     }
@@ -35,9 +33,8 @@ public class CharacterClassService {
         characterClassRepository.save(characterClass);
     }
 
-    //вероятно функция снизу должна принимать энтити
     @Transactional
-    public void delete(int id){
+    public void deleteById(int id){
         Optional<CharacterClass> foundCharacterClass = characterClassRepository.findById(id);
         characterClassRepository.delete(foundCharacterClass.orElseThrow(CharacterClassNotFoundException::new));}
 
